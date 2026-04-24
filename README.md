@@ -11,7 +11,6 @@ Personal portfolio website for **Aditya Garg**, Senior Frontend Developer (SDE2)
 | Tool | Purpose |
 |---|---|
 | Vite + React + TypeScript | App scaffold |
-| Tailwind CSS | Styling |
 | GSAP + ScrollTrigger | Hero pinning & scroll-driven reveals |
 | Framer Motion | Section animations (whileInView) |
 | @studio-freight/lenis | Smooth inertial scroll |
@@ -61,11 +60,3 @@ src/
 ├── data/content.ts    # all copy, experience, projects data
 └── styles/            # SCSS tokens, mixins, global styles
 ```
-
----
-
-## Contact
-
-- **Email:** aditya.garg3198@gmail.com
-- **LinkedIn:** [adityagarg3198](https://www.linkedin.com/in/adityagarg3198/)
-- **GitHub:** [aditya3198](https://github.com/aditya3198)
