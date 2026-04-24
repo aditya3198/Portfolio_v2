@@ -1,73 +1,71 @@
-# React + TypeScript + Vite
+# Aditya Garg — Portfolio v2
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Personal portfolio website for **Aditya Garg**, Senior Frontend Developer (SDE2) with 5+ years of experience. Built with a cinematic scroll-driven hero, glassmorphism design, and horizontal drag carousels.
 
-Currently, two official plugins are available:
+**Live:** https://aditya3198.github.io *(updating soon)*
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+| Tool | Purpose |
+|---|---|
+| Vite + React + TypeScript | App scaffold |
+| Tailwind CSS | Styling |
+| GSAP + ScrollTrigger | Hero pinning & scroll-driven reveals |
+| Framer Motion | Section animations (whileInView) |
+| @studio-freight/lenis | Smooth inertial scroll |
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Features
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **Cinematic hero** — sticky-pinned, scroll-scrubbed text reveal with staggered character animations
+- **Pure CSS background** — dot grid, animated glow blobs, scan line (no Three.js)
+- **Custom typed hook** — cycles through roles without any library
+- **Skills marquee** — infinite scroll rows + glass highlight cards
+- **Horizontal drag carousels** — Experience and Projects sections (mouse + touch)
+- **Glassmorphism UI** — dark theme with cyan/green accent gradients
+- **Single page** — anchor scroll, no React Router
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Getting Started
+
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run build    # production build
+npm run preview  # preview build locally
 ```
+
+---
+
+## Project Structure
+
+```
+src/
+├── App.tsx
+├── components/
+│   ├── Nav/
+│   ├── Hero/          # Hero.tsx, HeroBackground.tsx, HeroContent.tsx, StatCards.tsx
+│   ├── Skills/
+│   ├── Experience/
+│   ├── Projects/
+│   ├── Contact/
+│   └── Footer/
+├── hooks/             # useLenis, useTyped, useSplitText
+├── data/content.ts    # all copy, experience, projects data
+└── styles/            # SCSS tokens, mixins, global styles
+```
+
+---
+
+## Contact
+
+- **Email:** aditya.garg3198@gmail.com
+- **LinkedIn:** [adityagarg3198](https://www.linkedin.com/in/adityagarg3198/)
+- **GitHub:** [aditya3198](https://github.com/aditya3198)
