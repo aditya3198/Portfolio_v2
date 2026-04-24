@@ -107,6 +107,16 @@ export const projects = [
     isCurrent: true,
   },
   {
+    name: 'Toronto Bicycles',
+    desc: 'Freelance client site for a Toronto-based bicycle shop — product showcase with image hosting, contact form via EmailJS, and a Google Sheets macro-powered user list.',
+    tech: ['React', 'EmailJS', 'Google Sheets'],
+    badge: 'Freelance',
+    badgeColor: '#fb923c',
+    accent: '#fb923c',
+    liveUrl: null as string | null,
+    githubUrl: null as string | null,
+  },
+  {
     name: 'Portfolio v1',
     desc: 'First personal portfolio — clean layout, project showcase, and contact section. The foundation that led to v2.',
     tech: ['HTML', 'CSS', 'JavaScript','jQuery'],
