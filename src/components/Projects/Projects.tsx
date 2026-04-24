@@ -119,7 +119,11 @@ export function Projects() {
                 </div>
 
                 <div className="proj-card__links">
-                  {p.liveUrl && (
+                  {'isCurrent' in p && p.isCurrent ? (
+                    <span className="proj-card__link proj-card__link--here" aria-label="You are currently viewing this site">
+                      You're here ✦
+                    </span>
+                  ) : p.liveUrl ? (
                     <a
                       href={p.liveUrl}
                       target="_blank"
@@ -128,8 +132,10 @@ export function Projects() {
                     >
                       Live ↗
                     </a>
+                  ) : (
+                    <span className="proj-card__link proj-card__link--disabled" aria-disabled="true">Live ↗</span>
                   )}
-                  {p.githubUrl && (
+                  {p.githubUrl ? (
                     <a
                       href={p.githubUrl}
                       target="_blank"
@@ -138,12 +144,8 @@ export function Projects() {
                     >
                       Code ↗
                     </a>
-                  )}
-                  {!p.liveUrl && !p.githubUrl && (
-                    <>
-                      <span className="proj-card__link proj-card__link--disabled" aria-disabled="true">Live ↗</span>
-                      <span className="proj-card__link proj-card__link--ghost proj-card__link--disabled" aria-disabled="true">Code ↗</span>
-                    </>
+                  ) : (
+                    <span className="proj-card__link proj-card__link--ghost proj-card__link--disabled" aria-disabled="true">Code ↗</span>
                   )}
                 </div>
               </article>

@@ -23,9 +23,10 @@ export const personal = {
 
 export const typedRoles = [
   'React Engineer',
+  'System Design & Performance',
   'Frontend Developer',
   'SDE-2 · 5+ Years',
-  'UI Performance Nerd',
+  'Frontend Systems Thinker',
 ]
 
 export const stats = [
@@ -42,10 +43,12 @@ export const marqueeSkills = [
 ]
 
 export const highlightSkills = [
-  { label: 'React.js',    sub: '4.5 years', desc: 'Hooks · context · custom libs · optimisation',  glow: '#22d3ee' },
-  { label: 'TypeScript',  sub: '5.5 years', desc: 'Generics · utility types · strict mode',         glow: '#4ade80' },
-  { label: 'Lit',         sub: '1 year',    desc: 'Web components · shadow DOM · enterprise',       glow: '#a78bfa' },
-  { label: 'Web Perf',    sub: 'Expert',    desc: 'Code splitting · lazy load · Core Web Vitals',   glow: '#f472b6' },
+  { label: 'React.js',      sub: '5 years',    desc: 'Hooks · context · custom libs · optimisation',  glow: '#22d3ee' },
+  { label: 'TypeScript',    sub: '5.5 years',  desc: 'Generics · utility types · strict mode',         glow: '#4ade80' },
+  { label: 'Lit',           sub: '1 year',     desc: 'Web components · shadow DOM · enterprise',       glow: '#a78bfa' },
+  { label: 'Web Perf',      sub: 'Proficient', desc: 'Code splitting · lazy load · Core Web Vitals',   glow: '#f472b6' },
+  { label: 'React Native',  sub: '6 months',   desc: 'Cross-platform mobile · Expo · native APIs',     glow: '#fb923c' },
+  { label: 'Next.js',       sub: 'Learning',   desc: 'SSR · SSG · App Router · API routes',             glow: '#e2e8f0' },
 ]
 
 export const experience = [
@@ -99,18 +102,9 @@ export const projects = [
     badge: 'Live',
     badgeColor: '#4ade80',
     accent: '#4ade80',
-    liveUrl: 'https://aditya3198.github.io',
-    githubUrl: 'https://github.com/aditya3198',
-  },
-  {
-    name: 'BookMyMovie',
-    desc: 'Movie booking platform with dynamic seat selection, real-time availability and user authentication flows.',
-    tech: ['React', 'Node.js', 'MongoDB'],
-    badge: 'Live',
-    badgeColor: '#4ade80',
-    accent: '#a78bfa',
     liveUrl: null as string | null,
-    githubUrl: null as string | null,
+    githubUrl: 'https://github.com/aditya3198/Portfolio_v2',
+    isCurrent: true,
   },
   {
     name: 'Portfolio v1',

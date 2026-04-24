@@ -33,6 +33,22 @@ const skillIcons: Record<string, React.ReactElement> = {
       <circle cx="12" cy="17" r="1.5" fill="currentColor" />
     </svg>
   ),
+  'React Native': (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <rect x="7" y="2" width="10" height="20" rx="2" stroke="currentColor" strokeWidth="1.2" />
+      <circle cx="12" cy="18.5" r="1" fill="currentColor" />
+      <circle cx="12" cy="12" r="1.8" fill="currentColor" />
+      <ellipse cx="12" cy="12" rx="8" ry="3" stroke="currentColor" strokeWidth="1.1" />
+      <ellipse cx="12" cy="12" rx="8" ry="3" stroke="currentColor" strokeWidth="1.1" transform="rotate(60 12 12)" />
+      <ellipse cx="12" cy="12" rx="8" ry="3" stroke="currentColor" strokeWidth="1.1" transform="rotate(120 12 12)" />
+    </svg>
+  ),
+  'Next.js': (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <circle cx="12" cy="12" r="9.5" stroke="currentColor" strokeWidth="1.2" />
+      <path d="M9 8.5v7l7-7v5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ),
 }
 
 export function Skills() {
