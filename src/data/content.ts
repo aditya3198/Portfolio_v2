@@ -103,16 +103,6 @@ export const projects = [
     githubUrl: 'https://github.com/aditya3198',
   },
   {
-    name: 'BookMyMovie',
-    desc: 'Movie booking platform with dynamic seat selection, real-time availability and user authentication flows.',
-    tech: ['React', 'Node.js', 'MongoDB'],
-    badge: 'Live',
-    badgeColor: '#4ade80',
-    accent: '#a78bfa',
-    liveUrl: null as string | null,
-    githubUrl: null as string | null,
-  },
-  {
     name: 'Portfolio v1',
     desc: 'First personal portfolio — clean layout, project showcase, and contact section. The foundation that led to v2.',
     tech: ['HTML', 'CSS', 'JavaScript','jQuery'],
