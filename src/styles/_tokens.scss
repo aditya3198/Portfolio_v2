@@ -1,0 +1,55 @@
+// Design tokens — colours, typography, spacing, easings
+:root {
+  --bg:              #09090f;
+  --glass-bg:        rgba(255, 255, 255, 0.05);
+  --glass-border:    rgba(255, 255, 255, 0.10);
+  --glass-border-h:  rgba(255, 255, 255, 0.22);
+
+  --cyan:            #22d3ee;
+  --green:           #4ade80;
+  --purple:          #a78bfa;
+  --pink:            #f472b6;
+  --amber:           #fbbf24;
+  --grad:            linear-gradient(135deg, #22d3ee, #4ade80);
+
+  --text-primary:    #f2f2f2;
+  --text-secondary:  rgba(255, 255, 255, 0.50);
+  --text-muted:      rgba(255, 255, 255, 0.28);
+  --color-label:     rgba(255, 255, 255, 0.38);
+
+  --border-subtle:   rgba(255, 255, 255, 0.06);
+  --border-card:     rgba(255, 255, 255, 0.09);
+
+  --border-cyan:     rgba(34,  211, 238, 0.28);
+  --border-green:    rgba(74,  222, 128, 0.28);
+  --border-purple:   rgba(167, 139, 250, 0.28);
+  --border-pink:     rgba(244, 114, 182, 0.28);
+
+  --font-display:    'Syne', Georgia, serif;
+  --font-body:       'Inter', system-ui, -apple-system, sans-serif;
+
+  --text-hero:       clamp(44px, 7vw, 76px);
+  --text-h2:         clamp(26px, 3.5vw, 38px);
+  --text-h3:         18px;
+  --text-body:       15px;
+  --text-sm:         13px;
+  --text-xs:         11px;
+  --text-label:      10px;
+
+  --ease-out:        cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-sm:     0.35s;
+  --duration-md:     0.55s;
+  --duration-lg:     0.65s;
+
+  --max-width:       1060px;
+  --pad-x:           48px;
+
+  --z-nav:           100;
+  --z-hero-bg:       0;
+  --z-hero-content:  3;
+  --z-progress:      10;
+}
+
+// SCSS breakpoints
+$bp-mobile:  640px;
+$bp-tablet:  1024px;

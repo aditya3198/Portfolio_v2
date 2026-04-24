@@ -1,0 +1,189 @@
+@use '../../styles/mixins' as *;
+
+.experience {
+  padding: 112px 0;
+
+  &__pin {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 28px;
+  }
+
+  &__head {
+    will-change: transform, opacity;
+  }
+
+  &__rail {
+    width: 100%;
+    overflow: hidden;
+    padding: 4px 0 24px;
+  }
+
+  &__rail-inner {
+    display: inline-flex;
+    gap: 20px;
+    padding: 0 max(var(--pad-x), calc((100vw - var(--max-width)) / 2 + var(--pad-x)));
+    will-change: transform;
+
+    @include mobile {
+      padding: 0 24px;
+      // Mobile falls back to horizontal swipe
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
+
+  &__hint {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--text-secondary);
+    text-align: center;
+  }
+
+  @include mobile {
+    &__pin {
+      min-height: auto;
+    }
+  }
+}
+
+.exp-card {
+  position: relative;
+  @include glass;
+  width: 440px;
+  flex-shrink: 0;
+  padding: 32px 28px 28px;
+  overflow: hidden;
+
+  @include mobile {
+    width: 320px;
+    padding: 26px 22px;
+  }
+
+  &__top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+  }
+
+  &__head {
+    margin-bottom: 20px;
+  }
+
+  &__role {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 22px;
+    color: var(--text-primary);
+    margin: 0 0 6px;
+  }
+
+  &__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+
+  &__company {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  &__sep {
+    color: var(--text-muted);
+  }
+
+  &__client {
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+
+  &__period {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-label);
+  }
+
+  &__points {
+    list-style: none;
+    margin: 0 0 22px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    li {
+      display: flex;
+      gap: 10px;
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--text-secondary);
+    }
+  }
+
+  &__bullet {
+    flex-shrink: 0;
+    width: 4px;
+    height: 4px;
+    margin-top: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  &__tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  &__tag {
+    font-size: 11px;
+    padding: 4px 12px;
+    border-radius: 100px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-secondary);
+  }
+
+  &--end {
+    width: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 28px;
+    background: transparent;
+    border: 1px dashed var(--border-subtle);
+  }
+
+  &__end-text {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 18px;
+    color: var(--text-primary);
+  }
+
+  &__end-sub {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+}

@@ -1,0 +1,422 @@
+@use '../../styles/mixins' as *;
+
+.hero-wrapper {
+  position: relative;
+  // Total scroll distance — reveals finish at ~40%, hold until 92%, then fade.
+  // With 360vh, sticky pins for 260vh of scroll (360vh - 100vh viewport).
+  height: 360vh;
+  width: 100%;
+}
+
+.hero-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Background layers
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-hero-bg);
+  pointer-events: none;
+  overflow: hidden;
+
+  &__dots {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.08) 1px,
+      transparent 1px
+    );
+    background-size: 32px 32px;
+    opacity: 0.55;
+    mask-image: radial-gradient(ellipse at center, #000 40%, transparent 85%);
+    -webkit-mask-image: radial-gradient(ellipse at center, #000 40%, transparent 85%);
+  }
+
+  &__glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(70px);
+    will-change: transform;
+
+    &--cyan {
+      width: 540px;
+      height: 540px;
+      top: -14%;
+      left: -10%;
+      background: radial-gradient(circle, rgba(34, 211, 238, 0.22) 0%, transparent 70%);
+      animation: floatA 9s ease-in-out infinite;
+    }
+
+    &--green {
+      width: 460px;
+      height: 460px;
+      bottom: -16%;
+      right: -2%;
+      background: radial-gradient(circle, rgba(74, 222, 128, 0.18) 0%, transparent 70%);
+      animation: floatB 12s ease-in-out infinite;
+    }
+  }
+
+  &__scan {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      0deg,
+      transparent 45%,
+      rgba(34, 211, 238, 0.015) 50%,
+      transparent 55%
+    );
+    animation: scan 9s linear infinite;
+  }
+
+  &__vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      ellipse at center,
+      transparent 55%,
+      rgba(9, 9, 15, 0.7) 100%
+    );
+  }
+}
+
+// Content
+.hero-content {
+  position: relative;
+  z-index: var(--z-hero-content);
+  max-width: 880px;
+  padding: 0 var(--pad-x);
+  text-align: center;
+  margin: 0 auto;
+
+  @include mobile {
+    padding: 0 24px;
+  }
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 100px;
+  background: rgba(34, 211, 238, 0.06);
+  border: 1px solid var(--border-cyan);
+  color: var(--cyan);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  margin-bottom: 28px;
+  backdrop-filter: blur(8px);
+
+  &__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 10px var(--green);
+    animation: blink 2s ease-in-out infinite;
+  }
+}
+
+.hero-name {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--text-hero);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0 0 14px;
+  color: var(--text-primary);
+
+  .name-char {
+    display: inline-block;
+    will-change: transform, opacity;
+  }
+}
+
+.hero-role {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: clamp(16px, 2vw, 20px);
+  font-weight: 500;
+  margin-bottom: 22px;
+  color: var(--text-secondary);
+
+  &__prefix {
+    color: var(--cyan);
+    opacity: 0.7;
+  }
+
+  &__typed {
+    font-weight: 600;
+  }
+
+  &__caret {
+    display: inline-block;
+    width: 2px;
+    height: 1.05em;
+    background: var(--cyan);
+    animation: blink 1s steps(1, end) infinite;
+    transform: translateY(2px);
+  }
+}
+
+.hero-desc {
+  font-size: clamp(14px, 1.3vw, 16px);
+  line-height: 1.65;
+  color: var(--text-secondary);
+  max-width: 620px;
+  margin: 0 auto 34px;
+
+  .desc-word {
+    display: inline-block;
+    will-change: transform, opacity;
+  }
+}
+
+.hero-cta {
+  display: inline-flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 56px;
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 22px;
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: transform 0.25s var(--ease-out), border-color 0.25s ease,
+      background 0.25s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+
+    &--primary {
+      background: var(--grad);
+      color: #04141b;
+      font-weight: 600;
+      box-shadow: 0 8px 24px -8px rgba(34, 211, 238, 0.5);
+    }
+
+    &--ghost {
+      background: transparent;
+      border: 1px solid var(--glass-border);
+      color: var(--text-primary);
+
+      &:hover {
+        border-color: var(--glass-border-h);
+        background: var(--glass-bg);
+      }
+    }
+  }
+
+  &__arrow {
+    transition: transform 0.3s var(--ease-out);
+  }
+
+  &__btn:hover &__arrow {
+    transform: translateX(3px);
+  }
+}
+
+// Stat cards
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  max-width: 620px;
+  margin: 0 auto;
+
+  &__card {
+    @include glass;
+    @include glass-hover;
+    padding: 18px 12px;
+    text-align: center;
+  }
+
+  &__value {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(16px, 2.2vw, 26px);
+    line-height: 1;
+    margin-bottom: 6px;
+    white-space: nowrap;
+  }
+
+  &__label {
+    font-size: 11px;
+    color: var(--color-label);
+    letter-spacing: 0.04em;
+  }
+
+  @include mobile {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+}
+
+// Scroll hint (mouse + chevrons), visible on page load
+.scroll-hint {
+  // fixed so hero-sticky's overflow:hidden can never clip it
+  position: fixed;
+  left: 50%;
+  bottom: 22vh;
+  // No translateX — GSAP owns xPercent for centre→corner animation
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  pointer-events: none;
+  z-index: var(--z-hero-content);
+
+  &__mouse {
+    width: 22px;
+    height: 34px;
+    border: 1.5px solid var(--text-secondary);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    padding-top: 6px;
+  }
+
+  &__wheel {
+    width: 2px;
+    height: 6px;
+    background: var(--cyan);
+    border-radius: 2px;
+    animation: wheel 1.8s ease-in-out infinite;
+  }
+
+  &__label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  &__chevrons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+
+  &__chev {
+    width: 8px;
+    height: 8px;
+    border-right: 1.5px solid var(--cyan);
+    border-bottom: 1.5px solid var(--cyan);
+    transform: rotate(45deg);
+    opacity: 0;
+    animation: chev 1.8s ease-in-out infinite;
+
+    &:nth-child(1) { animation-delay: 0s;    }
+    &:nth-child(2) { animation-delay: 0.2s;  }
+    &:nth-child(3) { animation-delay: 0.4s;  }
+  }
+
+  @include mobile {
+    bottom: 16vh;
+  }
+}
+
+@keyframes wheel {
+  0%, 20%   { transform: translateY(0);    opacity: 1; }
+  60%, 100% { transform: translateY(10px); opacity: 0; }
+}
+
+@keyframes chev {
+  0%, 100% { opacity: 0; transform: rotate(45deg) translate(-2px, -2px); }
+  50%      { opacity: 1; transform: rotate(45deg) translate(0, 0);       }
+}
+
+// Skip intro button
+.hero-skip {
+  position: fixed;
+  bottom: 28px;
+  left: 28px;
+  z-index: var(--z-hero-content);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  background: none;
+  border: none;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease, color 0.2s ease;
+
+  &--visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  &:hover {
+    color: var(--text-secondary);
+  }
+
+  @include mobile {
+    bottom: 16px;
+    left: 16px;
+  }
+}
+
+// Scroll progress pill
+.hero-progress {
+  position: absolute;
+  right: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: var(--z-progress);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  pointer-events: none;
+
+  &__bar {
+    width: 2px;
+    height: 96px;
+    background: var(--cyan);
+    border-radius: 2px;
+    transform-origin: top;
+    box-shadow: 0 0 8px rgba(34, 211, 238, 0.3);
+    transition: transform 0.1s linear;
+  }
+
+  &__pct {
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--color-label);
+    letter-spacing: 0.1em;
+  }
+
+  @include mobile {
+    display: none;
+  }
+}

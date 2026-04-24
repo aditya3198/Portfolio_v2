@@ -1,0 +1,177 @@
+@use '../../styles/mixins' as *;
+
+.projects {
+  padding: 112px 0;
+
+  &__pin {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 28px;
+  }
+
+  &__head {
+    will-change: transform, opacity;
+  }
+
+  &__rail {
+    width: 100%;
+    overflow: hidden;
+    padding: 4px 0 24px;
+  }
+
+  &__rail-inner {
+    display: inline-flex;
+    gap: 20px;
+    padding: 0 max(var(--pad-x), calc((100vw - var(--max-width)) / 2 + var(--pad-x)));
+    will-change: transform;
+
+    @include mobile {
+      padding: 0 24px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
+
+  &__hint {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--text-secondary);
+    text-align: center;
+  }
+
+  @include mobile {
+    &__pin {
+      min-height: auto;
+    }
+  }
+}
+
+.proj-card {
+  position: relative;
+  @include glass;
+  width: 380px;
+  flex-shrink: 0;
+  padding: 32px 26px 26px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  @include mobile {
+    width: 300px;
+    padding: 26px 22px;
+  }
+
+  &:hover {
+    border-color: var(--glass-border-h);
+    transform: translateY(-4px);
+  }
+
+  &__top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+  }
+
+  &__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  &__name {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 20px;
+    margin: 0;
+    color: var(--text-primary);
+  }
+
+  &__badge {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 100px;
+    background: color-mix(in srgb, var(--badge-color) 10%, transparent);
+    color: var(--badge-color);
+    border: 1px solid color-mix(in srgb, var(--badge-color) 30%, transparent);
+    flex-shrink: 0;
+  }
+
+  &__desc {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin: 0 0 18px;
+    flex-grow: 1;
+  }
+
+  &__tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 20px;
+  }
+
+  &__tag {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 100px;
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
+    border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+    color: var(--accent);
+  }
+
+  &__links {
+    display: flex;
+    gap: 10px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  &__link {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 7px 14px;
+    border-radius: 100px;
+    background: var(--grad);
+    color: #04141b;
+    transition: transform 0.25s var(--ease-out);
+
+    &:hover {
+      transform: translateY(-1px);
+    }
+
+    &--ghost {
+      background: transparent;
+      border: 1px solid var(--glass-border);
+      color: var(--text-primary);
+
+      &:hover {
+        border-color: var(--glass-border-h);
+      }
+    }
+  }
+
+  &__link--disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+    filter: grayscale(1);
+  }
+}
