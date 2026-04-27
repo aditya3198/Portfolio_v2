@@ -54,6 +54,7 @@ const skillIcons: Record<string, React.ReactElement> = {
 export function Skills() {
   const sectionRef = useRef<HTMLElement>(null)
   const stickyRef = useRef<HTMLDivElement>(null)
+  const barRef = useRef<HTMLDivElement>(null)
   const marqueeLoop = [...marqueeSkills, ...marqueeSkills]
 
   useLayoutEffect(() => {
@@ -74,6 +75,9 @@ export function Skills() {
             scrub: 1,
             pin: stickyRef.current,
             pinSpacing: true,
+            onUpdate: (self) => {
+              if (barRef.current) barRef.current.style.transform = `scaleX(${self.progress})`
+            },
           },
         })
 
@@ -97,7 +101,7 @@ export function Skills() {
 
   return (
     <section className="skills" id="skills" ref={sectionRef}>
-      <div className="skills__sticky" ref={stickyRef}>
+      <div className="skills__sticky" ref={stickyRef} style={{ position: 'relative' }}>
         <div className="container">
           <div className="skills__heading-wrap">
             <span className="section-label">Skills</span>
@@ -137,6 +141,9 @@ export function Skills() {
               </div>
             ))}
           </div>
+        </div>
+        <div className="section-progress" aria-hidden>
+          <div className="section-progress__bar" ref={barRef} />
         </div>
       </div>
     </section>

@@ -8,6 +8,7 @@ export function Experience() {
   const sectionRef = useRef<HTMLElement>(null)
   const pinRef = useRef<HTMLDivElement>(null)
   const trackRef = useRef<HTMLDivElement>(null)
+  const barRef = useRef<HTMLDivElement>(null)
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -29,6 +30,9 @@ export function Experience() {
             end: () => `+=${totalScroll()}`,
             scrub: 1,
             invalidateOnRefresh: true,
+            onUpdate: (self) => {
+              if (barRef.current) barRef.current.style.transform = `scaleX(${self.progress})`
+            },
           },
         })
 
@@ -140,6 +144,10 @@ export function Experience() {
 
         <div className="container">
           <div className="experience__hint">scroll to traverse the timeline</div>
+        </div>
+
+        <div className="section-progress" aria-hidden>
+          <div className="section-progress__bar" ref={barRef} />
         </div>
       </div>
     </section>
