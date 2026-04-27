@@ -1,14 +1,23 @@
 @use '../../styles/mixins' as *;
 
+// Section padding is intentionally 0 — same reasoning as Skills.
 .experience {
-  padding: 112px 0;
+  position: relative;
 
   &__pin {
-    min-height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 28px;
+    gap: clamp(10px, 3vh, 28px);
+    padding: clamp(20px, 3.5vh, 48px) 0;
+
+    @include mobile {
+      height: auto;
+      overflow: visible;
+      padding: 64px 0;
+    }
   }
 
   &__head {
@@ -18,7 +27,7 @@
   &__rail {
     width: 100%;
     overflow: hidden;
-    padding: 4px 0 24px;
+    padding: 4px 0 clamp(8px, 2.5vh, 24px);
   }
 
   &__rail-inner {
@@ -29,7 +38,6 @@
 
     @include mobile {
       padding: 0 24px;
-      // Mobile falls back to horizontal swipe
       overflow-x: auto;
       overflow-y: hidden;
       scroll-snap-type: x mandatory;
@@ -48,12 +56,6 @@
     color: var(--text-secondary);
     text-align: center;
   }
-
-  @include mobile {
-    &__pin {
-      min-height: auto;
-    }
-  }
 }
 
 .exp-card {
@@ -61,7 +63,7 @@
   @include glass;
   width: 440px;
   flex-shrink: 0;
-  padding: 32px 28px 28px;
+  padding: clamp(16px, 3.5vh, 32px) 28px clamp(14px, 3vh, 28px);
   overflow: hidden;
 
   @include mobile {
@@ -79,13 +81,13 @@
   }
 
   &__head {
-    margin-bottom: 20px;
+    margin-bottom: clamp(10px, 2vh, 20px);
   }
 
   &__role {
     font-family: var(--font-display);
     font-weight: 800;
-    font-size: 22px;
+    font-size: clamp(16px, 2.5vh, 22px);
     color: var(--text-primary);
     margin: 0 0 6px;
   }
@@ -122,11 +124,11 @@
 
   &__points {
     list-style: none;
-    margin: 0 0 22px;
+    margin: 0 0 clamp(10px, 2.5vh, 22px);
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: clamp(5px, 1vh, 10px);
 
     li {
       display: flex;
@@ -150,7 +152,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
-    padding-top: 20px;
+    padding-top: clamp(10px, 2vh, 20px);
     border-top: 1px solid var(--border-subtle);
   }
 

@@ -30,7 +30,7 @@
   letter-spacing: 0.14em;
   color: var(--cyan);
   display: block;
-  margin-bottom: 12px;
+  margin-bottom: clamp(6px, 1.3vh, 12px);
 }
 
 @mixin section-heading {
@@ -39,7 +39,7 @@
   font-size: var(--text-h2);
   color: var(--text-primary);
   line-height: 1.15;
-  margin: 0 0 36px;
+  margin: 0 0 clamp(8px, 4vh, 36px);
 }
 
 @mixin container {
