@@ -18,11 +18,17 @@ export function useLenis() {
 
     // Intercept all anchor clicks so Lenis drives the scroll instead of the browser
     // Allow nav transition overlay to take over by calling e.preventDefault() first
+    // Per-section scroll offsets. Skills pins for +=380% so 90% through = 3.42×vh.
+    // Experience/Projects use dynamic totalScroll() so keep a generous vh offset.
+    const sectionOffset = (href: string) => {
+      if (href === '#skills') return window.innerHeight * 0.9 * 3.8
+      if (href === '#experience' || href === '#projects') return window.innerHeight * 0.9 - 60
+      return -60
+    }
+
     const onLenisScrollToInstant = (e: Event) => {
       const { target } = (e as CustomEvent<{ target: string }>).detail
-      const revealSections = ['#skills', '#experience', '#projects']
-      const offset = revealSections.includes(target) ? window.innerHeight * 0.9 - 60 : -60
-      lenis.scrollTo(target, { immediate: true, offset })
+      lenis.scrollTo(target, { immediate: true, offset: sectionOffset(target) })
     }
 
     const onAnchorClick = (e: MouseEvent) => {
@@ -32,25 +38,13 @@ export function useLenis() {
       const href = anchor.getAttribute('href')
       if (!href || href === '#') return
       e.preventDefault()
-
-      // Sections with cinematic reveals need extra offset to land past the
-      // reveal phase so content is already visible on arrival.
-      const revealSections = ['#skills', '#experience', '#projects']
-      const revealOffset = window.innerHeight * 0.9
-
-      const offset = revealSections.includes(href)
-        ? revealOffset - 60
-        : -60
-
-      lenis.scrollTo(href, { duration: 1.4, offset })
+      lenis.scrollTo(href, { duration: 1.4, offset: sectionOffset(href) })
     }
 
     // Allow any component to trigger a Lenis scroll with the correct reveal offset
     const onLenisScrollTo = (e: Event) => {
       const { target } = (e as CustomEvent<{ target: string }>).detail
-      const revealSections = ['#skills', '#experience', '#projects']
-      const offset = revealSections.includes(target) ? window.innerHeight * 0.9 - 60 : -60
-      lenis.scrollTo(target, { duration: 1.4, offset })
+      lenis.scrollTo(target, { duration: 1.4, offset: sectionOffset(target) })
     }
 
     document.addEventListener('click', onAnchorClick)
