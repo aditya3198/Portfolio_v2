@@ -99,6 +99,7 @@ export function Projects() {
               <article
                 key={p.name}
                 className="proj-card"
+                data-glow
                 style={
                   {
                     '--accent': p.accent,
@@ -106,6 +107,7 @@ export function Projects() {
                   } as CSSProperties
                 }
               >
+                <div className="proj-card__glow" aria-hidden />
                 <div className="proj-card__top" />
                 <div className="proj-card__head">
                   <h3 className="proj-card__name">{p.name}</h3>

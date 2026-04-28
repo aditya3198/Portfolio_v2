@@ -72,6 +72,19 @@
     padding: 26px 22px;
   }
 
+  &__glow {
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+    filter: blur(50px);
+    pointer-events: none;
+    left: calc(var(--mx, 50%) - 130px);
+    top:  calc(var(--my, 50%) - 130px);
+    opacity: calc(var(--dist, 0) * 0.35);
+  }
+
   &__top {
     position: absolute;
     top: 0;

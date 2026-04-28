@@ -125,6 +125,7 @@ export function Skills() {
               <div
                 key={s.label}
                 className="skills__card"
+                data-glow
                 style={{ '--glow': s.glow } as CSSProperties}
               >
                 <div className="skills__card-glow" />

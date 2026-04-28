@@ -99,8 +99,10 @@ export function Experience() {
               <article
                 key={job.company}
                 className="exp-card"
+                data-glow
                 style={{ '--accent': job.accent } as CSSProperties}
               >
+                <div className="exp-card__glow" aria-hidden />
                 <div className="exp-card__top" />
                 <div className="exp-card__head">
                   <h3 className="exp-card__role">{job.role}</h3>
