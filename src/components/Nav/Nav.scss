@@ -49,37 +49,52 @@
   }
 
   &__links {
+    position: relative;
     display: flex;
     align-items: center;
-    gap: 28px;
+    gap: 4px;
     list-style: none;
     margin: 0;
     padding: 0;
 
     a {
       position: relative;
+      display: block;
+      padding: 5px 11px;
       font-size: var(--text-sm);
       font-weight: 500;
       color: var(--text-secondary);
-      transition: color 0.2s ease;
+      transition: color 0.2s ease, text-shadow 0.2s ease;
+      letter-spacing: 0.01em;
+      font-family: var(--font-body);
 
+      // Active underline — stays on scroll-tracked active link
       &::after {
         content: '';
         position: absolute;
-        bottom: -3px;
-        left: 0;
-        right: 0;
+        bottom: 0;
+        left: 11px;
+        right: 11px;
         height: 1px;
-        background: var(--cyan);
+        background: var(--grad);
         transform: scaleX(0);
         transform-origin: left;
-        transition: transform 0.25s var(--ease-out);
+        transition: transform 0.3s var(--ease-out);
       }
 
-      &:hover { color: var(--text-primary); }
+      &:hover {
+        color: var(--text-primary);
+        // Dark halo keeps text legible under the bright comet nucleus
+        text-shadow:
+          0 0 8px rgba(9, 9, 15, 1),
+          0 0 16px rgba(9, 9, 15, 0.9);
+      }
 
       &.nav__link--active {
         color: var(--text-primary);
+        text-shadow:
+          0 0 8px rgba(9, 9, 15, 1),
+          0 0 16px rgba(9, 9, 15, 0.9);
         &::after { transform: scaleX(1); }
       }
     }
@@ -87,6 +102,26 @@
     @include mobile {
       display: none;
     }
+  }
+
+  // ── Sliding hover pill ───────────────────────────────────────────────────
+  &__indicator {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 0;
+    height: 30px;
+    transform: translateY(-50%);
+    border-radius: 7px;
+    background: rgba(9, 9, 15, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    pointer-events: none;
+    opacity: 0;
+    // JS sets left/width directly; transitions animate between those values
+    transition:
+      left    0.28s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      width   0.28s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      opacity 0.18s ease;
   }
 
   // ── Hamburger button (mobile only) ──────────────────────────────────────
@@ -182,4 +217,93 @@
     opacity: 1;
     transform: translateX(0);
   }
+}
+
+// ── Page transition curtain ──────────────────────────────────────────────────
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9990;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  pointer-events: none;
+  overflow: hidden;
+
+  // Start above viewport; slides down on enter, up on exit
+  transform: translateY(-100%);
+  transition: transform 0.42s cubic-bezier(0.76, 0, 0.24, 1);
+
+  // Space nebula accents so overlay matches the site bg
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  &::before {
+    width: 600px;
+    height: 600px;
+    top: -20%;
+    left: -10%;
+    background: radial-gradient(circle, rgba(34, 211, 238, 0.12) 0%, transparent 65%);
+    filter: blur(60px);
+  }
+
+  &::after {
+    width: 500px;
+    height: 500px;
+    bottom: -15%;
+    right: -5%;
+    background: radial-gradient(circle, rgba(74, 222, 128, 0.09) 0%, transparent 65%);
+    filter: blur(70px);
+  }
+
+  &--in {
+    transform: translateY(0);
+    pointer-events: all;
+  }
+
+  &--out {
+    transform: translateY(100%);
+    transition: transform 0.44s cubic-bezier(0.76, 0, 0.24, 1);
+  }
+
+  &__label {
+    position: relative;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(36px, 6vw, 64px);
+    letter-spacing: -0.02em;
+  }
+
+  &__bar {
+    position: relative;
+    width: min(220px, 40vw);
+    height: 2px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  &__fill {
+    height: 100%;
+    width: 0%;
+    border-radius: 2px;
+    background: var(--grad);
+    // Animates from 0→100% over the hold period (starts when --in is applied)
+    .nav-overlay--in & {
+      animation: overlay-progress 0.78s cubic-bezier(0.4, 0, 0.2, 1) 0.05s forwards;
+    }
+  }
+}
+
+@keyframes overlay-progress {
+  from { width: 0%; }
+  to   { width: 100%; }
 }
