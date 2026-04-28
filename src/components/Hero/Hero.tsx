@@ -1,7 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { HeroBackground } from './HeroBackground'
 import { HeroContent } from './HeroContent'
 import './Hero.scss'
 
@@ -20,10 +19,37 @@ export function Hero() {
   }, [])
 
   const handleSkip = () => {
+    if (!wrapperRef.current) return
+    // ScrollTrigger range: offsetTop → offsetTop + wrapperHeight - vh
+    const scrollStart = wrapperRef.current.offsetTop
+    const scrollEnd = scrollStart + wrapperRef.current.offsetHeight - window.innerHeight
+    const target = scrollStart + (scrollEnd - scrollStart) * 0.90
     document.dispatchEvent(
-      new CustomEvent('lenis:scrollTo', { detail: { target: '#skills' } }),
+      new CustomEvent('lenis:scrollTo', { detail: { target } }),
     )
   }
+
+  useEffect(() => {
+    const footer = document.querySelector('footer')
+    if (!footer) return
+
+    const obs = new IntersectionObserver(([entry]) => {
+      const el = document.getElementById('scroll-hint')
+      if (!el) return
+      if (entry.isIntersecting) {
+        gsap.to(el, {
+          opacity: 0, duration: 0.4, ease: 'power2.in',
+          onComplete: () => gsap.set(el, { display: 'none' }),
+        })
+      } else {
+        gsap.set(el, { display: 'flex' })
+        gsap.to(el, { opacity: 1, duration: 0.4, ease: 'power2.out' })
+      }
+    })
+
+    obs.observe(footer)
+    return () => obs.disconnect()
+  }, [])
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -58,7 +84,7 @@ export function Hero() {
             setProgress(self.progress)
 
             const p = self.progress
-            const newPhase = p > 0.84 ? 2 : p > 0.02 ? 1 : 0
+            const newPhase = p > 0.02 ? 1 : 0
 
             if (newPhase === hintPhase.current) return
             hintPhase.current = newPhase
@@ -72,7 +98,7 @@ export function Hero() {
                 scale: 1, opacity: 1,
                 duration: 0.6, ease: 'power2.out',
               })
-            } else if (newPhase === 1) {
+            } else {
               const w = document.getElementById('scroll-hint')?.offsetWidth ?? 120
               gsap.to('#scroll-hint', {
                 xPercent: 0,
@@ -83,12 +109,12 @@ export function Hero() {
                 transformOrigin: 'right bottom',
                 duration: 0.7, ease: 'power2.inOut',
               })
-            } else {
-              gsap.to('#scroll-hint', { opacity: 0, duration: 0.4, ease: 'power2.in' })
             }
           },
-          onLeave: () => gsap.set('#scroll-hint', { display: 'none' }),
-          onEnterBack: () => gsap.set('#scroll-hint', { display: 'flex' }),
+          onEnterBack: () => {
+            gsap.set('#scroll-hint', { display: 'flex' })
+            gsap.to('#scroll-hint', { opacity: 1, duration: 0.4, ease: 'power2.out' })
+          },
         },
       })
 
@@ -113,7 +139,6 @@ export function Hero() {
   return (
     <div ref={wrapperRef} className="hero-wrapper" id="top">
       <div ref={heroRef} className="hero-sticky">
-        <HeroBackground />
         <HeroContent />
 
         <div className="scroll-hint" id="scroll-hint" aria-hidden>

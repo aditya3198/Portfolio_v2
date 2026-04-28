@@ -17,7 +17,16 @@ export function useLenis() {
     gsap.ticker.lagSmoothing(0)
 
     // Intercept all anchor clicks so Lenis drives the scroll instead of the browser
+    // Allow nav transition overlay to take over by calling e.preventDefault() first
+    const onLenisScrollToInstant = (e: Event) => {
+      const { target } = (e as CustomEvent<{ target: string }>).detail
+      const revealSections = ['#skills', '#experience', '#projects']
+      const offset = revealSections.includes(target) ? window.innerHeight * 0.9 - 60 : -60
+      lenis.scrollTo(target, { immediate: true, offset })
+    }
+
     const onAnchorClick = (e: MouseEvent) => {
+      if (e.defaultPrevented) return
       const anchor = (e.target as HTMLElement).closest('a[href^="#"]') as HTMLAnchorElement | null
       if (!anchor) return
       const href = anchor.getAttribute('href')
@@ -46,10 +55,12 @@ export function useLenis() {
 
     document.addEventListener('click', onAnchorClick)
     document.addEventListener('lenis:scrollTo', onLenisScrollTo)
+    document.addEventListener('lenis:scrollToInstant', onLenisScrollToInstant)
 
     return () => {
       document.removeEventListener('click', onAnchorClick)
       document.removeEventListener('lenis:scrollTo', onLenisScrollTo)
+      document.removeEventListener('lenis:scrollToInstant', onLenisScrollToInstant)
       gsap.ticker.remove(rafUpdate)
       lenis.destroy()
     }

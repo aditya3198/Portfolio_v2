@@ -19,63 +19,82 @@
   justify-content: center;
 }
 
-// Background layers
+// Background layers — fixed so it persists across all sections
 .hero-bg {
-  position: absolute;
+  position: fixed;
   inset: 0;
-  z-index: var(--z-hero-bg);
+  z-index: -1;
+  background: var(--bg);
   pointer-events: none;
   overflow: hidden;
 
-  &__dots {
-    position: absolute;
-    inset: 0;
-    background-image: radial-gradient(
-      circle,
-      rgba(255, 255, 255, 0.08) 1px,
-      transparent 1px
-    );
-    background-size: 32px 32px;
-    opacity: 0.55;
-    mask-image: radial-gradient(ellipse at center, #000 40%, transparent 85%);
-    -webkit-mask-image: radial-gradient(ellipse at center, #000 40%, transparent 85%);
-  }
-
-  &__glow {
+  // Space nebula clouds
+  &__nebula {
     position: absolute;
     border-radius: 50%;
-    filter: blur(70px);
     will-change: transform;
 
     &--cyan {
-      width: 540px;
-      height: 540px;
-      top: -14%;
-      left: -10%;
-      background: radial-gradient(circle, rgba(34, 211, 238, 0.22) 0%, transparent 70%);
-      animation: floatA 9s ease-in-out infinite;
+      width: 700px;
+      height: 700px;
+      top: -18%;
+      left: -12%;
+      background: radial-gradient(circle, rgba(34, 211, 238, 0.13) 0%, transparent 65%);
+      filter: blur(60px);
+      animation: floatA 11s ease-in-out infinite;
+    }
+
+    &--purple {
+      width: 600px;
+      height: 600px;
+      top: 10%;
+      right: 5%;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 65%);
+      filter: blur(80px);
+      animation: floatB 14s ease-in-out infinite;
     }
 
     &--green {
-      width: 460px;
-      height: 460px;
-      bottom: -16%;
-      right: -2%;
-      background: radial-gradient(circle, rgba(74, 222, 128, 0.18) 0%, transparent 70%);
-      animation: floatB 12s ease-in-out infinite;
+      width: 500px;
+      height: 500px;
+      bottom: -14%;
+      right: -8%;
+      background: radial-gradient(circle, rgba(74, 222, 128, 0.1) 0%, transparent 65%);
+      filter: blur(70px);
+      animation: floatA 9s ease-in-out 3s infinite;
     }
   }
 
-  &__scan {
+  // Canvas star layers — rendered by JS with glows + diffraction spikes
+  &__canvas {
     position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      0deg,
-      transparent 45%,
-      rgba(34, 211, 238, 0.015) 50%,
-      transparent 55%
-    );
-    animation: scan 9s linear infinite;
+    top: 0;
+    left: 0;
+    display: block;
+    will-change: transform;
+
+    &--far { animation: shimmer 10s ease-in-out infinite; }
+    &--mid { animation: shimmer  8s ease-in-out 2s infinite; }
+  }
+
+  // Shooting stars
+  &__shoot {
+    position: absolute;
+    top: 12%;
+    left: 15%;
+    width: 160px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.1));
+    border-radius: 1px;
+    opacity: 0;
+    animation: shoot 14s linear 2s infinite;
+
+    &--b {
+      top: 38%;
+      left: 55%;
+      width: 110px;
+      animation: shoot 18s linear 9s infinite;
+    }
   }
 
   &__vignette {
@@ -83,10 +102,22 @@
     inset: 0;
     background: radial-gradient(
       ellipse at center,
-      transparent 55%,
-      rgba(9, 9, 15, 0.7) 100%
+      transparent 50%,
+      rgba(9, 9, 15, 0.82) 100%
     );
   }
+}
+
+@keyframes shimmer {
+  0%, 100% { opacity: 0.75; }
+  50%       { opacity: 1; }
+}
+
+@keyframes shoot {
+  0%       { transform: translate(0, 0) rotate(-28deg);       opacity: 0; }
+  1%       { opacity: 1; }
+  10%      { transform: translate(500px, 250px) rotate(-28deg); opacity: 0; }
+  100%     { transform: translate(500px, 250px) rotate(-28deg); opacity: 0; }
 }
 
 // Content
@@ -289,11 +320,12 @@
   &__mouse {
     width: 22px;
     height: 34px;
-    border: 1.5px solid var(--text-secondary);
+    border: 1.5px solid rgba(255, 255, 255, 0.75);
     border-radius: 12px;
     display: flex;
     justify-content: center;
     padding-top: 6px;
+    filter: drop-shadow(0 0 6px rgba(34, 211, 238, 0.4));
   }
 
   &__wheel {
@@ -309,7 +341,8 @@
     font-weight: 500;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--text-muted);
+    color: rgba(255, 255, 255, 0.7);
+    text-shadow: 0 0 12px rgba(34, 211, 238, 0.5);
   }
 
   &__chevrons {
@@ -322,11 +355,12 @@
   &__chev {
     width: 8px;
     height: 8px;
-    border-right: 1.5px solid var(--cyan);
-    border-bottom: 1.5px solid var(--cyan);
+    border-right: 2px solid var(--cyan);
+    border-bottom: 2px solid var(--cyan);
     transform: rotate(45deg);
     opacity: 0;
     animation: chev 1.8s ease-in-out infinite;
+    filter: drop-shadow(0 0 4px var(--cyan));
 
     &:nth-child(1) { animation-delay: 0s;    }
     &:nth-child(2) { animation-delay: 0.2s;  }

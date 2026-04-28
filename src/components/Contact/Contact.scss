@@ -1,6 +1,8 @@
 @use '../../styles/mixins' as *;
 
 .contact {
+  position: relative;
+  z-index: 1;
   padding: clamp(32px, 12.5vh, 112px) 0;
 
   &__card {
