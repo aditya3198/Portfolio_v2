@@ -1,4 +1,7 @@
 import { useLenis } from './hooks/useLenis'
+import { useCursorGlow } from './hooks/useCursorGlow'
+import { useCometTrail } from './hooks/useCometTrail'
+import { HeroBackground } from './components/Hero/HeroBackground'
 import { Nav } from './components/Nav/Nav'
 import { Hero } from './components/Hero/Hero'
 import { Skills } from './components/Skills/Skills'
@@ -9,9 +12,12 @@ import { Footer } from './components/Footer/Footer'
 
 function App() {
   useLenis()
+  useCursorGlow()
+  useCometTrail()
 
   return (
     <>
+      <HeroBackground />
       <a href="#skills" className="skip-link">Skip to content</a>
       <Nav />
       <main>

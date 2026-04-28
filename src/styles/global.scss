@@ -5,13 +5,14 @@
 *::before,
 *::after {
   box-sizing: border-box;
+  cursor: none !important;
 }
 
 html,
 body {
   margin: 0;
   padding: 0;
-  background: var(--bg);
+  background: transparent;
   color: var(--text-primary);
   font-family: var(--font-body);
   font-size: var(--text-body);
