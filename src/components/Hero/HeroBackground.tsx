@@ -105,9 +105,9 @@ export function HeroBackground() {
   const s3 = useRef<Star[]>([])
 
   useEffect(() => {
-    s1.current = makeStars(620, 0.4, 1.6, 0.06, 0.22)
-    s2.current = makeStars(220, 1.2, 2.8, 0.09, 0.28)
-    s3.current = makeStars( 80, 2.2, 5.0, 0.12, 0.32)
+    s1.current = makeStars(620, 0.4, 1.6, 0.12, 0.36)
+    s2.current = makeStars(220, 1.2, 2.8, 0.18, 0.48)
+    s3.current = makeStars( 80, 2.2, 5.0, 0.24, 0.58)
 
     const dpr = window.devicePixelRatio || 1
     const W = Math.ceil(window.innerWidth  * 1.15)
@@ -130,11 +130,13 @@ export function HeroBackground() {
     const H = Math.ceil(window.innerHeight * 1.15)
     const cx = W / 2, cy = H / 2
 
-    // Touch devices: one static paint, no cursor tracking, no RAF loop
+    // Touch devices: one static paint, no cursor tracking, no RAF loop.
+    // Use an off-screen cursor position so the proximity boost never fires.
     if (window.matchMedia('(pointer: coarse)').matches) {
-      if (c1.current) paintStars(c1.current.getContext('2d')!, W, H, s1.current, cx, cy)
-      if (c2.current) paintStars(c2.current.getContext('2d')!, W, H, s2.current, cx, cy)
-      if (c3.current) paintStars(c3.current.getContext('2d')!, W, H, s3.current, cx, cy)
+      const offX = -9999, offY = -9999
+      if (c1.current) paintStars(c1.current.getContext('2d')!, W, H, s1.current, offX, offY)
+      if (c2.current) paintStars(c2.current.getContext('2d')!, W, H, s2.current, offX, offY)
+      if (c3.current) paintStars(c3.current.getContext('2d')!, W, H, s3.current, offX, offY)
       return
     }
 

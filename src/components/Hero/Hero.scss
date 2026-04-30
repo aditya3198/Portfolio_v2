@@ -39,14 +39,14 @@
       height: 700px;
       top: -18%;
       left: -12%;
-      background: radial-gradient(circle, rgba(34, 211, 238, 0.13) 0%, transparent 65%);
+      background: radial-gradient(circle, rgba(34, 211, 238, 0.22) 0%, transparent 65%);
       filter: blur(60px);
       animation: floatA 11s ease-in-out infinite;
 
       @include mobile {
         width: 340px;
         height: 340px;
-        background: radial-gradient(circle, rgba(34, 211, 238, 0.07) 0%, transparent 65%);
+        background: radial-gradient(circle, rgba(34, 211, 238, 0.14) 0%, transparent 65%);
       }
     }
 
@@ -55,14 +55,14 @@
       height: 600px;
       top: 10%;
       right: 5%;
-      background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 65%);
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.20) 0%, transparent 65%);
       filter: blur(80px);
       animation: floatB 14s ease-in-out infinite;
 
       @include mobile {
         width: 280px;
         height: 280px;
-        background: radial-gradient(circle, rgba(139, 92, 246, 0.07) 0%, transparent 65%);
+        background: radial-gradient(circle, rgba(139, 92, 246, 0.13) 0%, transparent 65%);
       }
     }
 
@@ -71,14 +71,14 @@
       height: 500px;
       bottom: -14%;
       right: -8%;
-      background: radial-gradient(circle, rgba(74, 222, 128, 0.1) 0%, transparent 65%);
+      background: radial-gradient(circle, rgba(74, 222, 128, 0.18) 0%, transparent 65%);
       filter: blur(70px);
       animation: floatA 9s ease-in-out 3s infinite;
 
       @include mobile {
         width: 240px;
         height: 240px;
-        background: radial-gradient(circle, rgba(74, 222, 128, 0.06) 0%, transparent 65%);
+        background: radial-gradient(circle, rgba(74, 222, 128, 0.12) 0%, transparent 65%);
       }
     }
   }
@@ -120,22 +120,22 @@
     inset: 0;
     background: radial-gradient(
       ellipse at center,
-      transparent 50%,
-      rgba(9, 9, 15, 0.82) 100%
+      transparent 55%,
+      rgba(9, 9, 15, 0.60) 100%
     );
 
     @include mobile {
       background: radial-gradient(
         ellipse at center,
-        transparent 30%,
-        rgba(9, 9, 15, 0.92) 100%
+        transparent 35%,
+        rgba(9, 9, 15, 0.75) 100%
       );
     }
   }
 }
 
 @keyframes shimmer {
-  0%, 100% { opacity: 0.75; }
+  0%, 100% { opacity: 0.90; }
   50%       { opacity: 1; }
 }
 
@@ -222,7 +222,7 @@
 
   &__prefix {
     color: var(--cyan);
-    opacity: 0.7;
+    opacity: 1;
   }
 
   &__typed {

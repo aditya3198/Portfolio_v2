@@ -118,10 +118,10 @@ export function Hero() {
         },
       })
 
-      tl.fromTo('#hero-role',   { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.15 }, 0.05)
-      tl.fromTo('.desc-word',   { opacity: 0, y: 10 }, { opacity: 1, y: 0, stagger: 0.006, duration: 0.18 }, 0.18)
-      tl.fromTo('#hero-cta',    { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.1  }, 0.42)
-      tl.fromTo('#hero-stats',  { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.12 }, 0.5)
+      tl.fromTo('#hero-role',   { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.15 }, 0.05)
+      tl.fromTo('.desc-word',   { autoAlpha: 0, y: 10 }, { autoAlpha: 1, y: 0, stagger: 0.006, duration: 0.18 }, 0.18)
+      tl.fromTo('#hero-cta',    { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.1  }, 0.42)
+      tl.fromTo('#hero-stats',  { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: 0.12 }, 0.5)
 
       // Fade hero background layers BEFORE the content exits so the hero sticky
       // is already invisible when it unsticks — the page bg (#09090f) shows
