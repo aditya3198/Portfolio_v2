@@ -94,7 +94,7 @@
     pointer-events: none;
     left: calc(var(--mx, 50%) - 120px);
     top:  calc(var(--my, 50%) - 120px);
-    opacity: calc(var(--dist, 0) * 0.3);
+    opacity: calc(var(--dist, 0) * 0.50);
   }
 
   &__top {

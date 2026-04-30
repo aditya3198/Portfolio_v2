@@ -87,7 +87,7 @@
     pointer-events: none;
     left: calc(var(--mx, 50%) - 130px);
     top:  calc(var(--my, 50%) - 130px);
-    opacity: calc(var(--dist, 0) * 0.35);
+    opacity: calc(var(--dist, 0) * 0.55);
   }
 
   &__top {
@@ -179,7 +179,7 @@
     font-size: 11px;
     padding: 4px 12px;
     border-radius: 100px;
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(255, 255, 255, 0.06);
     border: 1px solid var(--border-subtle);
     color: var(--text-secondary);
   }
