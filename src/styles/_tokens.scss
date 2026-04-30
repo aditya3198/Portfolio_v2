@@ -1,9 +1,9 @@
 // Design tokens — colours, typography, spacing, easings
 :root {
   --bg:              #09090f;
-  --glass-bg:        rgba(255, 255, 255, 0.05);
-  --glass-border:    rgba(255, 255, 255, 0.10);
-  --glass-border-h:  rgba(255, 255, 255, 0.22);
+  --glass-bg:        rgba(255, 255, 255, 0.07);
+  --glass-border:    rgba(255, 255, 255, 0.15);
+  --glass-border-h:  rgba(255, 255, 255, 0.30);
 
   --cyan:            #22d3ee;
   --green:           #4ade80;
@@ -12,18 +12,18 @@
   --amber:           #fbbf24;
   --grad:            linear-gradient(135deg, #22d3ee, #4ade80);
 
-  --text-primary:    #f2f2f2;
-  --text-secondary:  rgba(255, 255, 255, 0.50);
-  --text-muted:      rgba(255, 255, 255, 0.28);
-  --color-label:     rgba(255, 255, 255, 0.38);
+  --text-primary:    #ffffff;
+  --text-secondary:  rgba(255, 255, 255, 0.70);
+  --text-muted:      rgba(255, 255, 255, 0.46);
+  --color-label:     rgba(255, 255, 255, 0.58);
 
-  --border-subtle:   rgba(255, 255, 255, 0.06);
-  --border-card:     rgba(255, 255, 255, 0.09);
+  --border-subtle:   rgba(255, 255, 255, 0.10);
+  --border-card:     rgba(255, 255, 255, 0.14);
 
-  --border-cyan:     rgba(34,  211, 238, 0.28);
-  --border-green:    rgba(74,  222, 128, 0.28);
-  --border-purple:   rgba(167, 139, 250, 0.28);
-  --border-pink:     rgba(244, 114, 182, 0.28);
+  --border-cyan:     rgba(34,  211, 238, 0.45);
+  --border-green:    rgba(74,  222, 128, 0.45);
+  --border-purple:   rgba(167, 139, 250, 0.45);
+  --border-pink:     rgba(244, 114, 182, 0.45);
 
   --font-display:    'Syne', Georgia, serif;
   --font-body:       'Inter', system-ui, -apple-system, sans-serif;
@@ -53,3 +53,12 @@
 // SCSS breakpoints
 $bp-mobile:  640px;
 $bp-tablet:  1024px;
+
+// On mobile the dimmer ambient light makes ultra-low-opacity glass invisible;
+// bump background and border so cards read clearly against the dark bg.
+@media (max-width: $bp-mobile) {
+  :root {
+    --glass-bg:        rgba(255, 255, 255, 0.11);
+    --glass-border:    rgba(255, 255, 255, 0.20);
+  }
+}
