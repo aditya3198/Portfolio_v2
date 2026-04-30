@@ -30,6 +30,9 @@ function drawSpike4(
 
 export function useCometTrail() {
   useEffect(() => {
+    // Touch/stylus devices: no mouse cursor, skip the whole effect
+    if (window.matchMedia('(pointer: coarse)').matches) return
+
     // ── canvas overlay ─────────────────────────────────────────────────────────
     const canvas = document.createElement('canvas')
     Object.assign(canvas.style, {

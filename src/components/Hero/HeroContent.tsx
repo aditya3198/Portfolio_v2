@@ -5,7 +5,6 @@ import { useTyped } from '../../hooks/useTyped'
 import { StatCards } from './StatCards'
 
 export function HeroContent() {
-  const nameChars = useSplitText(personal.name, 'chars')
   const descWords = useSplitText(personal.description, 'words')
 
   // Start typing shortly after mount
@@ -24,10 +23,15 @@ export function HeroContent() {
       </span>
 
       <h1 className="hero-name" id="hero-name">
-        {nameChars.map(({ content, className, key }) => (
-          <span key={key} className={className}>
-            {content}
-          </span>
+        {personal.name.split(' ').map((word, wi) => (
+          <Fragment key={wi}>
+            {wi > 0 && ' '}
+            <span className="name-word">
+              {word.split('').map((char, ci) => (
+                <span key={ci} className="name-char">{char}</span>
+              ))}
+            </span>
+          </Fragment>
         ))}
       </h1>
 

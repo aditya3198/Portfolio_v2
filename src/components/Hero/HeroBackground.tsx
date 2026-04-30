@@ -128,6 +128,15 @@ export function HeroBackground() {
 
     const W = Math.ceil(window.innerWidth  * 1.15)
     const H = Math.ceil(window.innerHeight * 1.15)
+    const cx = W / 2, cy = H / 2
+
+    // Touch devices: one static paint, no cursor tracking, no RAF loop
+    if (window.matchMedia('(pointer: coarse)').matches) {
+      if (c1.current) paintStars(c1.current.getContext('2d')!, W, H, s1.current, cx, cy)
+      if (c2.current) paintStars(c2.current.getContext('2d')!, W, H, s2.current, cx, cy)
+      if (c3.current) paintStars(c3.current.getContext('2d')!, W, H, s3.current, cx, cy)
+      return
+    }
 
     let tx = 0, ty = 0, parX = 0, parY = 0
     let rawX = window.innerWidth / 2, rawY = window.innerHeight / 2

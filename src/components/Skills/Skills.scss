@@ -15,6 +15,12 @@
     gap: clamp(10px, 3vh, 28px);
     // Top/bottom padding keeps content away from viewport edges.
     padding: clamp(20px, 3.5vh, 48px) 0;
+
+    @include mobile {
+      height: auto;
+      overflow: visible;
+      padding: 64px 0;
+    }
   }
 
   &__heading-wrap {

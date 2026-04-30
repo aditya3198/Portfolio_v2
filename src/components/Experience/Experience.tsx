@@ -14,6 +14,16 @@ export function Experience() {
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia()
 
+      mm.add('(max-width: 640px)', () => {
+        gsap.fromTo(
+          '.experience__head',
+          { opacity: 0, y: 24 },
+          { opacity: 1, y: 0, duration: 0.6, scrollTrigger: { trigger: '.experience__head', start: 'top 92%' } },
+        )
+        // Cards always visible on mobile — horizontal scroll-snap handles UX
+        gsap.set('.exp-card', { opacity: 1, y: 0, scale: 1 })
+      })
+
       mm.add('(min-width: 641px)', () => {
         const track = trackRef.current
         if (!track) return

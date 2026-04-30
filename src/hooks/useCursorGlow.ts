@@ -5,6 +5,9 @@ const RADIUS = 130
 
 export function useCursorGlow() {
   useEffect(() => {
+    // Touch/stylus devices: no hover state, skip proximity glow
+    if (window.matchMedia('(pointer: coarse)').matches) return
+
     const onMove = (e: MouseEvent) => {
       const cards = document.querySelectorAll<HTMLElement>('[data-glow]')
       for (const card of cards) {

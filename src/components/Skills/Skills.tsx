@@ -61,6 +61,21 @@ export function Skills() {
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia()
 
+      mm.add('(max-width: 640px)', () => {
+        gsap.fromTo(
+          '.skills__heading-wrap',
+          { opacity: 0, y: 24 },
+          { opacity: 1, y: 0, duration: 0.6, scrollTrigger: { trigger: '.skills__heading-wrap', start: 'top 92%' } },
+        )
+        gsap.fromTo(
+          '.skills__marquee',
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.6, scrollTrigger: { trigger: '.skills__marquee', start: 'top 92%' } },
+        )
+        // Cards: always visible on mobile — no scroll-triggered opacity toggle
+        gsap.set('.skills__card', { opacity: 1, y: 0, scale: 1 })
+      })
+
       mm.add('(min-width: 641px)', () => {
         // Set initial states explicitly so scrub timeline sees them immediately.
         gsap.set('.skills__heading-wrap', { opacity: 0, y: 28 })

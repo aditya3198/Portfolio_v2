@@ -29,6 +29,18 @@
     width: 100%;
     overflow: hidden;
     padding: 4px 0 clamp(8px, 2.5vh, 24px);
+
+    @include mobile {
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
   }
 
   &__rail-inner {
@@ -39,14 +51,6 @@
 
     @include mobile {
       padding: 0 24px;
-      overflow-x: auto;
-      overflow-y: hidden;
-      scroll-snap-type: x mandatory;
-      scrollbar-width: none;
-
-      &::-webkit-scrollbar {
-        display: none;
-      }
     }
   }
 
@@ -68,8 +72,9 @@
   overflow: hidden;
 
   @include mobile {
-    width: 320px;
+    width: min(320px, 80vw);
     padding: 26px 22px;
+    scroll-snap-align: start;
   }
 
   &__glow {
